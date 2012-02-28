@@ -1,0 +1,2 @@
+#!/bin/bash
+gcc md5.c -o md5 -D_TEST_
