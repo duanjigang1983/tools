@@ -4,7 +4,7 @@ inserting your monitor hosts and configurations in the conf file.
 
 To run monkey:
 
-$ python -c configfile -m 10
+$ python monkey.py -c configfile -m 10
 
 -c: specify the configfile
 you may get a config file by modifing conf/rule.conf
