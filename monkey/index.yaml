@@ -1,0 +1,32 @@
+---
+default:
+  name: monkey
+  release: '17'
+  summary: monkey monitoring tools
+  version: '1.0.0'
+  packager: 'jigang.djg'
+  requires:
+        - python-simplejson
+     
+  
+  files:
+    - "/usr/local/monkey/conf/rule.conf": 
+        group: "root"
+        perm:  "0666"
+        owner: "root"
+        config: "yes"
+    - "/usr/local/monkey/conf/check_sys.conf": 
+        group: "root"
+        perm:  "0666"
+        owner: "root"
+        config: "yes"
+    - "/usr/local/monkey/conf/example.conf": 
+        group: "root"
+        perm:  "0666"
+        owner: "root"
+        config: "yes"
+
+
+
+
+

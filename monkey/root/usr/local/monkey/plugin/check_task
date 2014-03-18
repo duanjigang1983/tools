@@ -1,0 +1,16 @@
+#!/bin/bash   
+
+if [ $# -gt 0 ]   
+then   
+    cmd=$1
+    PROCESS_NUM=`ps -A -o comm | grep -Rw "$cmd" | wc -l` 
+    msg="OK"
+    if [ $PROCESS_NUM -lt 1 ]
+    then
+        msg="ERROR"
+    fi  
+    echo "$msg"
+fi   
+  
+  
+

@@ -35,3 +35,7 @@ Key point:
 object in the config file
 
 ------------ by duanjigang1983 <duanjigang1983@gmail.com> to be updated
+
+logs:
+(1) 2014-03-18 resolve bugs of multi-thread in monkey.py and add source of
+nagios plugins to monkey

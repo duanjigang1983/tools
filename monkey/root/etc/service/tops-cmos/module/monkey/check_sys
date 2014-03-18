@@ -1,0 +1,91 @@
+#!/bin/sh                                                                                                                    
+
+#################################################################################
+#
+#       Type     :      State Monitor Plugin
+#       Function :      check all system disk mem load cpu used
+#       Usage    :      ./check_sys.sh
+#       Creator  :      Longsong.an(2014/02/25)
+#       Modifier :      Longsong.an(2014/06/25)
+#
+#################################################################################
+CMDNAME=`basename $0`
+CMDHELP="\
+ Useage: `basename $0` 
+"
+
+source "/usr/local/monkey/conf/check_sys.conf"
+export PATH=/usr/sbin/:/usr/bin/:/bin:/sbin:$PATH
+#Percent_U=1
+#Cpuused_U=-1
+#Load_U=-1
+#Mem_U=-1
+#ip=`hostname -i`
+ip=""
+
+function check_disk()
+{
+	df -k|egrep -v 'Filesystem|none|devfs'|awk '{print $5}'|sort -nr|while read line
+	do
+	 Perc_used=`echo $line|cut -d% -f 1 `
+	  ####percent size
+	   if [ $Perc_used -gt $Percent_U ] ; then
+		       echo "Diskused:    $Perc_used" 
+			   exit 1
+		fi
+	done
+
+}
+	
+
+function check_mem()
+{
+ Memused=`tsar   -check| awk '{print $4}'|awk -F'=' '{print $2}' |awk -F'%' '{print $1}'|awk '{print sprintf("%d", $0);}'`
+ if [ "$Memused" -gt "$Mem_U" ];then
+   echo "Memused:    $Memused "
+
+ fi
+ 
+}
+
+function check_cpu()
+
+{
+Cpuused=`tsar   -check| awk '{print $3}'|awk -F'=' '{print $2}' |awk '{print sprintf("%d", $0);}'`
+if [ "$Cpuused" -gt "$Cpuused_U" ];then
+   echo "Cpuused:    $Cpuused "
+
+fi
+
+}
+
+function check_load()
+
+{
+###########begin ################
+#LOAD1=`uptime |awk -F: '{print $NF}'|tr -d ' '|cut -d ',' -f 1`
+LOAD5=`uptime |awk -F: '{print $NF}'|tr -d ' '|cut -d ',' -f 2|awk '{print sprintf("%d", $0);}'`
+#LOAD15=`uptime |awk -F: '{print $NF}'|tr -d ' '|cut -d ',' -f 3`
+
+#if [ -z "$LOAD1" ]; then
+#    LOAD1=0;
+#fi
+
+if [ -z "$LOAD5" ]; then
+    LOAD5=0;
+fi
+
+#if [ -z "$LOAD15" ]; then
+#    LOAD15=0;
+#fi
+if [ "$LOAD5" -gt "$Load_U" ];then
+   echo "Loadused:    $LOAD5 "
+fi
+
+}
+check_disk
+check_mem
+check_cpu
+check_load
+
+

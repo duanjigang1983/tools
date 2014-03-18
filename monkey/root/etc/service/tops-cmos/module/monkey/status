@@ -1,0 +1,9 @@
+#!/bin/sh
+bin="/usr/local/monkey/bin/monkey.py"
+conf="/usr/local/monkey/conf/rule.conf"
+
+if [ -f "$bin" ] && [ -f "$conf" ]
+then
+    $bin -c $conf -m 20
+fi
+
