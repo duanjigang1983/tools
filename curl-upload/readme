@@ -1,0 +1,26 @@
+(1) build the client code: 
+        Make
+    then you get 'fu'
+
+(2) setup your web service with php, and copy testserver.php into it.
+
+(3) run upload command:
+    ./fu  Makefile "http://xxx/testserver.php"
+    
+you may get an out put like below:
+start uploading now...
+cmesoft-passwordArray
+(
+    [gingko-uploader] => Array
+        (
+            [name] => Makefile
+            [type] => application/octet-stream
+            [tmp_name] => /tmp/php9kPYMG
+            [error] => 0
+            [size] => 137
+        )
+
+)
+upload file for 'fEWREWREWREWREW' success
+Finished uploading 'Makefile' to 'http://xxxxx/testserver.php'
+3 second(s) elapsed, size: 137 Kb,  avg speed: 45 KB/s
