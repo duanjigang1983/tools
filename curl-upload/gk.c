@@ -15,9 +15,9 @@ int main (int argc, char *argv[])
 {
 	gk_conf_t gc;
 	char strurl[512] = {0};
-    struct stat st; 
-    time_t s_tm,e_tm, now;
-    char * fname, * url;
+	struct stat st; 
+	time_t s_tm,e_tm, now;
+	char * fname, * url;
 	srand((unsigned) time(NULL));
 	if(an_args(argc, argv, &gc))
 	{
