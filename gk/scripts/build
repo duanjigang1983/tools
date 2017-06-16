@@ -1,0 +1,7 @@
+#!/bin/sh
+make || exit 1
+mkdir -p $DESTDIR/usr/local/gk
+mkdir -p $DESTDIR/usr/local/gk/etc/
+mkdir -p $DESTDIR/usr/local/gk/bin
+install gk $DESTDIR/usr/local/gk/bin/
+install gk.ini.ex $DESTDIR/usr/local/gk/etc/gk.ini

@@ -1,0 +1,24 @@
+---
+default:
+  name: gk
+  release: '1'
+  license: 'free'
+  requires:
+    - glibc-devel
+    - curl
+  summary: ginkgos command to manage reposity and package from a remote host
+  packager: 'ginkgos'
+  group: 'ginkgos'
+  version: '1.1.0'
+  description: 'cmd:date;cat source/readme;'
+  files:
+    - "/usr/local/gk/etc/gk.ini": 
+        group: "root"
+        perm: "0777"
+        owner: "nobody"
+        config: "no" ## no 
+
+  
+
+
+

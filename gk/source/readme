@@ -1,0 +1,10 @@
+Setting up your gk tools.
+
+(1) Installing 
+	yum install -y gk
+
+(2) Config gk.ini
+	edit /usr/local/gk/etc/gk.ini, just modify default ak, uid and ginkgos domain to yours
+
+(3) Run a gk command:
+	/usr/local/gk/bin//gk -c /usr/local/gk/etc/gk.ini -k uploadpkg  -f test.rpm  -v 7 -r lsmd -a x86_64
