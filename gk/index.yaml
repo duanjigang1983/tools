@@ -1,7 +1,7 @@
 ---
 default:
   name: gk
-  release: '1'
+  release: '2'
   license: 'free'
   requires:
     - glibc-devel

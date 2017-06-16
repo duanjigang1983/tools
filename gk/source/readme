@@ -7,4 +7,4 @@ Setting up your gk tools.
 	edit /usr/local/gk/etc/gk.ini, just modify default ak, uid and ginkgos domain to yours
 
 (3) Run a gk command:
-	/usr/local/gk/bin//gk -c /usr/local/gk/etc/gk.ini -k uploadpkg  -f test.rpm  -v 7 -r lsmd -a x86_64
+	/usr/local/gk/bin/gk -c /usr/local/gk/etc/gk.ini -k uploadpkg  -f test.rpm  -v 7 -r lsmd -a x86_64
