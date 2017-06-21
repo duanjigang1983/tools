@@ -1,7 +1,8 @@
 #!/bin/sh
 make clean || exit 1
 make || exit 1
-mkdir -p $DESTDIR/etc/service/repobuilder
+#mkdir -p $DESTDIR/etc/service/repobuilder
 mkdir -p $DESTDIR/usr/bin/
+mkdir -p $DESTDIR/etc
 install repobuilder $DESTDIR/usr/bin/
 install repo.conf $DESTDIR/etc/

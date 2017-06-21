@@ -1,0 +1,156 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.6	//
+BLUE	colordefine.h	8;"	d
+BROWN	colordefine.h	15;"	d
+CC	Makefile	/^CC=gcc$/;"	m
+CLOSE	os_independent.h	15;"	d
+CLOSE	os_independent.h	41;"	d
+CLOSE_FILE	os_independent.h	14;"	d
+CMD_LEN	datadef.h	46;"	d
+CYAN	colordefine.h	11;"	d
+DARY_GRAY	colordefine.h	10;"	d
+DIR_LEN	datadef.h	51;"	d
+EXE	Makefile	/^EXE=repobuilder$/;"	m
+EXE_NAME	configserver.h	3;"	d
+FILE_NAME_LEN	configserver.h	16;"	d
+GREEN	colordefine.h	6;"	d
+GetNetip	nethelper.c	/^int	GetNetip(unsigned int *ip)$/;"	f
+INC	Makefile	/^INC= -g   -D__LINUX__ -c -Wall -I.\/ -Wall -O2$/;"	m
+INI__INCLUDED_	inihelper.h	3;"	d
+InitArgs	configserver.c	/^void InitArgs(int argc, char* argv[])$/;"	f
+LIBS	Makefile	/^LIBS=  -g  -Wl,--enable-new-dtags -Wl,-rpath, -lpthread  $/;"	m
+LIGHT_BLUE	colordefine.h	9;"	d
+LIGHT_CYAN	colordefine.h	12;"	d
+LIGHT_GRAY	colordefine.h	17;"	d
+LIGHT_GREEN	colordefine.h	7;"	d
+LIGHT_PURPLE	colordefine.h	14;"	d
+LIGHT_RED	colordefine.h	5;"	d
+LogMessage	loghelper.c	/^void LogMessage(const char *szFile, const char* fmt,...)$/;"	f
+MAX	inihelper.c	3;"	d	file:
+MAX_ICE_STRING	configserver.h	17;"	d
+MAX_NIC	datadef.h	45;"	d
+MAX_REPO	datadef.h	50;"	d
+MAX_SEC	inihelper.h	12;"	d
+MAX_THREAD	datadef.h	37;"	d
+MAX_VAL	os_independent.h	53;"	d
+MAX_VAR	inihelper.h	11;"	d
+MIN	inihelper.c	4;"	d	file:
+MIN_VAL	os_independent.h	54;"	d
+MSG_DONTWAIT	os_independent.h	48;"	d
+MSG_NOSIGNAL	os_independent.h	45;"	d
+NONE	colordefine.h	3;"	d
+PATH_LEN	configserver.h	24;"	d
+PURPLE	colordefine.h	13;"	d
+RED	colordefine.h	4;"	d
+SEC_TITLE	inihelper.h	10;"	d
+SLEEP_SEC	configserver.h	7;"	d
+SLEEP_SEC	configserver.h	9;"	d
+STR_IP	configserver.h	23;"	d
+STR_IP	os_independent.h	50;"	d
+THREAD_NUM	datadef.h	47;"	d
+TIMEOUT	datadef.h	48;"	d
+UNLINK	os_independent.h	19;"	d
+UNLINK	os_independent.h	42;"	d
+VAR_NAME	inihelper.h	8;"	d
+VAR_VAL	inihelper.h	9;"	d
+WHITE	colordefine.h	18;"	d
+YELLOW	colordefine.h	16;"	d
+_CONFIG_SERVER_H_	configserver.h	2;"	d
+_CPLOR_DEF_	colordefine.h	2;"	d
+_DATA_DEF_H_	datadef.h	2;"	d
+_NT_HELPER_H_	nethelper.h	2;"	d
+_OS_INDEP_H_	os_independent.h	2;"	d
+_repo	datadef.h	/^typedef struct _repo$/;"	s
+_section	inihelper.h	/^typedef struct _section$/;"	s
+_var_entry	inihelper.h	/^typedef struct _var_entry$/;"	s
+app_thread	cmthread.c	/^void * app_thread(void*data)$/;"	f
+atoll	os_independent.h	/^static _int64 atoll(const char *string){return _atoi64(string);} $/;"	f
+basedir	datadef.h	/^	char 			basedir[DIR_LEN];$/;"	m	struct:__anon6
+close_ini	inihelper.c	/^void 	close_ini(void * data)$/;"	f
+conf	datadef.h	/^	char			conf[256];$/;"	m	struct:__anon6
+conf	datadef.h	/^	void * conf;$/;"	m	struct:__anon3
+config_t	datadef.h	/^}config_t;$/;"	t	typeref:struct:__anon6
+daemon	daemon.c	/^int daemon (int nochdir, int noclose)$/;"	f
+daemon	datadef.h	/^	unsigned char 	daemon;$/;"	m	struct:__anon6
+data	datadef.h	/^	void* data;	$/;"	m	struct:__anon3
+deliver_app_task	configserver.c	/^int	deliver_app_task (thread_pool_t * pool, config_t * conf)$/;"	f
+entry_list	inihelper.h	/^	var_entry entry_list[MAX_VAR];$/;"	m	struct:_section
+entry_number	inihelper.h	/^	int		entry_number;$/;"	m	struct:_section
+func	datadef.h	/^	func_t func;$/;"	m	struct:__anon3
+func_t	datadef.h	/^typedef int (*func_t)(void*data);$/;"	t
+g_config	main.c	/^config_t g_config;$/;"	v
+g_pid	loghelper.c	/^static int g_pid = 0;$/;"	v	file:
+g_plist	configserver.c	/^param_t g_plist[MAX_THREAD];$/;"	v
+get_nic_list	nethelper.c	/^int	get_nic_list(nic_t *list)$/;"	f
+get_time_str	configserver.c	/^char* get_time_str(time_t * tm)$/;"	f
+have_error	inihelper.c	/^int have_error(void* data)$/;"	f
+index	datadef.h	/^	int index;$/;"	m	struct:__anon3
+index	datadef.h	/^	unsigned int  index;$/;"	m	struct:__anon4
+ini_t	inihelper.c	/^}ini_t;$/;"	t	typeref:struct:__anon2	file:
+init_config	configserver.c	/^int	init_config (config_t * config, int argc, char* argv[])$/;"	f
+init_ini	inihelper.c	/^void* init_ini(const char* file)$/;"	f
+init_thread_slot	cmthread.c	/^int 	init_thread_slot(thread_pool_t * pp, const config_t * conf)$/;"	f
+interval	datadef.h	/^ 	int 			interval;$/;"	m	struct:__anon6
+intv	datadef.h	/^		int intv;$/;"	m	struct:_repo
+ip	nethelper.h	/^		unsigned int ip;$/;"	m	struct:__anon1
+key_t	os_independent.h	/^typedef int key_t;$/;"	t
+last_update	datadef.h	/^		time_t last_update;$/;"	m	struct:_repo
+load_repo_conf	configserver.c	/^int load_repo_conf (config_t * conf)$/;"	f
+loop	datadef.h	/^	int 			loop;$/;"	m	struct:__anon6
+m_Error	inihelper.c	/^	int  m_Error; \/\/ error flag$/;"	m	struct:__anon2	file:
+m_fp	inihelper.c	/^	FILE * m_fp ; \/\/file pointer$/;"	m	struct:__anon2	file:
+m_nRet	inihelper.c	/^	int  m_nRet;$/;"	m	struct:__anon2	file:
+m_pos	inihelper.c	/^	long m_pos;$/;"	m	struct:__anon2	file:
+m_strRet	inihelper.c	/^	char m_strRet[VAR_VAL];$/;"	m	struct:__anon2	file:
+mac	nethelper.h	/^		unsigned char mac[6];$/;"	m	struct:__anon1
+main	main.c	/^int main (int argc, char* argv[])$/;"	f
+mem_file_handle	os_independent.h	/^typedef HANDLE    mem_file_handle;$/;"	t
+mem_file_handle	os_independent.h	/^typedef void*    mem_file_handle;$/;"	t
+mkdir_rec	configserver.c	/^int 	mkdir_rec(const char* path)$/;"	f
+mutex	datadef.h	/^	pthread_mutex_t mutex; \/\/mutex$/;"	m	struct:__anon4
+name	nethelper.h	/^		char	name[30];$/;"	m	struct:__anon1
+netmask	nethelper.h	/^		unsigned int netmask;$/;"	m	struct:__anon1
+next	datadef.h	/^		void * next;$/;"	m	struct:_repo
+nic_t	nethelper.h	/^	}nic_t;$/;"	t	typeref:struct:__anon1
+nthread	datadef.h	/^	unsigned short  nthread;$/;"	m	struct:__anon6
+param	datadef.h	/^	param_t *     param;$/;"	m	struct:__anon4
+param_t	datadef.h	/^}param_t;$/;"	t	typeref:struct:__anon3
+path	datadef.h	/^		char path [256];$/;"	m	struct:_repo
+read_int	inihelper.c	/^int read_int(void* data, const char *szSec, const char *szName, int nDefault)$/;"	f
+read_section	inihelper.c	/^int read_section(void* data, section * pSec)$/;"	f
+read_string	inihelper.c	/^char* read_string(void* data, const char *szSec, const char *szName, const char *szDefault)$/;"	f
+repo_build_func	configserver.c	/^int repo_build_func (void*data)$/;"	f
+repo_list	datadef.h	/^	repo_t			repo_list[MAX_REPO];$/;"	m	struct:__anon6
+repo_num	datadef.h	/^	int 			repo_num;$/;"	m	struct:__anon6
+repo_t	datadef.h	/^}repo_t;$/;"	t	typeref:struct:_repo
+reset_thread	cmthread.c	/^int	reset_thread (thread_pool_t * pool)$/;"	f
+run_over	cmthread.c	/^unsigned char	run_over(thread_pool_t * pool)$/;"	f
+section	inihelper.h	/^}section;$/;"	t	typeref:struct:_section
+sigfile	datadef.h	/^		char sigfile[256];$/;"	m	struct:_repo
+sigfile	datadef.h	/^	char 			sigfile[64];$/;"	m	struct:__anon6
+socklen_t	os_independent.h	/^typedef int socklen_t;$/;"	t
+start_thread	configserver.c	/^int	start_thread(thread_pool_t * pool, const config_t * conf)$/;"	f
+status	datadef.h	/^	unsigned char status; \/\/status$/;"	m	struct:__anon4
+status_already_dead	datadef.h	/^	status_already_dead = 6 $/;"	e	enum:thread_status
+status_dead	datadef.h	/^	status_dead = 5,$/;"	e	enum:thread_status
+status_free	datadef.h	/^	status_free = 1,$/;"	e	enum:thread_status
+status_over	datadef.h	/^	status_over = 4,$/;"	e	enum:thread_status
+status_ready	datadef.h	/^	status_ready = 2,$/;"	e	enum:thread_status
+status_running	datadef.h	/^	status_running = 3,$/;"	e	enum:thread_status
+terminate_thread	cmthread.c	/^int	terminate_thread (thread_pool_t * pool)$/;"	f
+thread	datadef.h	/^	pthread_t thread; \/\/thread$/;"	m	struct:__anon4
+thread_list	datadef.h	/^	thread_t thread_list[MAX_THREAD];$/;"	m	struct:__anon5
+thread_num	datadef.h	/^	unsigned int thread_num;$/;"	m	struct:__anon5
+thread_pool_t	datadef.h	/^}thread_pool_t;$/;"	t	typeref:struct:__anon5
+thread_status	datadef.h	/^enum thread_status$/;"	g
+thread_t	datadef.h	/^}thread_t;$/;"	t	typeref:struct:__anon4
+title	inihelper.h	/^	char title[SEC_TITLE];$/;"	m	struct:_section
+tt	os_independent.h	/^static int tt = 1;$/;"	v
+var_entry	inihelper.h	/^}var_entry;$/;"	t	typeref:struct:_var_entry
+var_name	inihelper.h	/^	char var_name[VAR_NAME];$/;"	m	struct:_var_entry
+var_value	inihelper.h	/^	char var_value[VAR_VAL];$/;"	m	struct:_var_entry
+verb	datadef.h	/^	unsigned char 	verb;$/;"	m	struct:__anon6

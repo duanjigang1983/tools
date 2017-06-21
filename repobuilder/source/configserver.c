@@ -4,6 +4,36 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 extern config_t g_config;
+static int32_t get_userid (const char* name, uid_t * uid)
+{
+    char szline[1024] = {0};
+    u_int8_t find = 0;
+    FILE * fp = fopen ("/etc/passwd", "r");
+    if (!fp) return -1; 
+        
+    while (fgets (szline ,1024, fp))
+    {   
+        char fname[128] = {0},szuid[10] = {0};
+        char * p1, * p2, *p3;
+
+        p1 = strchr (szline, ':');
+        if (!p1)continue;
+        p2 = strchr (p1+1, ':');
+        if (!p2)continue;
+        p3 = strchr (p2+1, ':');
+        if (!p3) continue;
+        strncpy (fname, szline, p1-szline);
+        if (strcmp(name, fname)) continue;
+        strncpy(szuid, p2 + 1, p3-p2-1);
+        //printf ("===%s-%d\n", uid, strlen(uid));
+        *uid = atoi(szuid);
+        find  = 1;
+  	break;
+    }
+    return find ? 1:-1;
+}
+
+
 int 	mkdir_rec(const char* path)
 {
 	char szpath[512] = {0};
@@ -148,11 +178,24 @@ int repo_build_func (void*data)
 							{
 								char cmd[512] = {0};
 								//for createrepo-0.4.11-3.el5
-								sprintf (cmd, "/usr/bin/createrepo -d -p --update -o %s %s", pr->path, pr->path);
-								//for createrepo-0.4.4-2
-								//sprintf (cmd, "/usr/bin/createrepo  -p  -o %s %s", pr->path, pr->path);
-								printf ("Run commad:"YELLOW"%s"NONE"\n", cmd);
-								system(cmd);
+								uid_t uid;
+								if( get_userid (conf->user, &uid) <= 0) 
+								{
+									printf("get uid failed\n");
+								}else
+								{
+									if (!getuid()&& setuid(uid))
+									{
+										printf("getuid and setuid faild\n");
+									}else
+									{
+											sprintf (cmd, "/usr/bin/createrepo -d -p --update -o %s %s", pr->path, pr->path);
+									//for createrepo-0.4.4-2
+									//sprintf (cmd, "/usr/bin/createrepo  -p  -o %s %s", pr->path, pr->path);
+										printf ("Run commad:"YELLOW"%s"NONE"\n", cmd);
+										system(cmd);
+									}
+								}
 							}else
 							{
 								if(conf->verb)
@@ -263,9 +306,10 @@ int load_repo_conf (config_t * conf)
 	conf->nthread = atoi (read_string(ini, "general", "thread_num", "10"));
 	conf->loop = atoi (read_string(ini, "general", "loop", "0"));
 	//added @2013-12-05 --start
-	sprintf (conf->basedir, "%s", read_string(ini, "general", "basedir", "/home/yum"));
+	sprintf (conf->basedir, "%s", read_string(ini, "general", "basedir", "NONE"));
 	//added @2013-12-05 --finish
 	sprintf (conf->sigfile, "%s", read_string(ini, "general", "signalfile", "update.txt"));
+	sprintf (conf->user, "%s", read_string(ini, "general", "user", "root"));
 
 	if (conf->verb)
 	{
@@ -287,8 +331,11 @@ int load_repo_conf (config_t * conf)
                   if (strncasecmp(sc.entry_list[i].var_name, "path", 4) == 0)
                     {
                            //strcpy(rp.path, sc.entry_list[i].var_value);
-                           sprintf(rp.path, "%s/%s", conf->basedir, sc.entry_list[i].var_value);
-                           continue;
+							if(strcmp(conf->basedir, "NONE"))
+                           		sprintf(rp.path, "%s/%s", conf->basedir, sc.entry_list[i].var_value);
+							else
+								sprintf(rp.path, "%s", sc.entry_list[i].var_value);
+                           	continue;
                      }	
 
 					if (strncasecmp(sc.entry_list[i].var_name, "on", 2) == 0)

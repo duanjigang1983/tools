@@ -64,6 +64,7 @@ typedef struct
 	unsigned char 	daemon;
 	unsigned char 	verb;
 	char			conf[256];
+	char			user[64];
 	char 			basedir[DIR_LEN];
 	char 			sigfile[64];
  	int 			interval;
