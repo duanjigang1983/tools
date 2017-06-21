@@ -1,6 +1,6 @@
 ////////// gcc test.c -I/usr/include/rpm -lrpm -lrpmdb -lrpmio -lpopt -o test_rpm
 //require rpm-devel
-//example by duanjigang @ 2012-11-16
+//example by cme@ 2012-11-16
 
 #include <rpmlib.h>
 #include <stdio.h>

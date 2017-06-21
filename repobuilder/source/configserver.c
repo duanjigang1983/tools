@@ -161,7 +161,7 @@ int repo_build_func (void*data)
 										
 					pa->index, pr->path, pr->intv);
 
-					//added by duanjigang@2013-12-05 --start
+					//added @2013-12-05 --start
 					//create dir if not exists because the yum command want to find repodata in this 
 					//dir no matter whether there are rpm files in it or not
 					if (stat(pr->path, &st))
@@ -170,7 +170,7 @@ int repo_build_func (void*data)
 						sprintf (cmd, "/bin/mkdir -p %s", pr->path);
 						system (cmd);	
 					}
-					//added by duanjigang@2013-12-05 --finish
+					//added @2013-12-05 --finish
 
 					if (!stat(pr->path, &st))
 					{
