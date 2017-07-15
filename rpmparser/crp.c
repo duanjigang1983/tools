@@ -10,9 +10,14 @@
 #include <rpmio.h>
 #include <popt.h>
 #include <errno.h>
+#include "datadef.h"
+#include <sys/types.h>
+       #include <sys/stat.h>
+       #include <fcntl.h>
+
 
 int samplerpm (const char *szrpm);
-char * readHeaderString (Header header, int_32 tag_id);
+char * readHeaderString (Header hd, int tag_id);
 int main (int argc, char* argv[])
 {
 	if (argc > 0)
@@ -26,11 +31,11 @@ int main (int argc, char* argv[])
 	return 0;	
 }
 
-char * readHeaderString (Header header, int_32 tag_id)
+char * readHeaderString (Header header, int tag_id)
 {
-  	int_32 type;
+  	int type;
   	void *pointer;
-  	int_32 data_size;
+  	int data_size;
   	int header_status = headerGetEntry (header, tag_id, &type, &pointer, &data_size);
   	if (header_status)
     	{
@@ -46,46 +51,57 @@ int samplerpm (const char *szrpm)
 {
 	char g_szname[1024] = {0};
 	FD_t fd = Fopen (szrpm, "r");
+	int nfd = 0;
+	size_t st = 0;
 	memset (g_szname, 0, 1024);
 	sprintf (g_szname, "%s", szrpm);
 	fflush (stdin);
 	fflush (stdout);
   	if (!fd)
-    {
-      		//perror("open file '%s' failed\n", szrpm);
+    	{
       		return 1;
-    }
-   	//else
-    	// printf ("open '%s' success\n", szrpm);
-   
+    	}
+  	 
   	struct rpmlead plead;
-  	int lead = readLead (fd, &plead);
+	nfd = open(szrpm, O_RDONLY);
+	if(nfd < 0)
+	{
+		 printf("open %s failed\n", szrpm);
+		 return 1;
+	}
+	st = read(nfd, &plead, sizeof(struct rpmlead));
+	if(st <= 0)
+	{
+		printf("read error\n");
+		close(nfd);
+		return 1;
+	}
+	close(nfd);
+	printf("%s, %d\n", plead.name, plead.major);
+	rpmRC rc = RPMRC_FAIL; 
 
-  	if (lead)
-    {
-      		//printf ("readLead of '%s' failed\n", szrpm);
-      		Fclose (fd);
-      		return 1;
-    }
-  	else
-    {
-      			//printf ("name=%s,may=%d,min=%d\n",plead.name,plead.major,plead.minor);
-    }
+	 const char item[] = "Signature";
+	const char* msg  = NULL;
+	rc = rdLead(fd, NULL, msg);
+	 //rpmpkgRead(item, fd, NULL, &msg);
+	 rc = rdSignature(fd, NULL, &msg);
 
-  	//sigType sig_type = plead.signature_type;
+
   	Header header;
   	rpmRC ret = rpmReadSignature (fd, &header, plead.signature_type);
 
   	if (ret != RPMRC_OK)
     	{
-      		//printf ("rpmReadSignature of '%s' failed\n", szrpm);
+      		printf ("rpmReadSignature of '%s' failed\n", szrpm);
       		Fclose (fd);
       		return 1;
     	}
-  	//else
-  	//printf ("rpmReadSignature success:%s\n", szrpm);
+  	else
+  	printf ("rpmReadSignature success:%s\n", szrpm);
   	//read header
+    //rpmReadSignature(fd, NULL, plead.signature_type, NULL);
   	Header newheader = headerRead (fd, (plead.major >= 3) ? HEADER_MAGIC_YES : HEADER_MAGIC_NO);
+  	//Header newheader = headerRead (fd, (5 >= 3) ? HEADER_MAGIC_YES : HEADER_MAGIC_NO);
   	if (!newheader)
     	{
       		//printf ("headerRead of '%s' failed\n", szrpm);

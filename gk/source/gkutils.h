@@ -36,6 +36,7 @@ typedef struct _gk_conf_t
     char as[GK_STR_LEN];
     char uid[GK_STR_LEN];
     char url[GK_URL_LEN];
+	char user[GK_STR_LEN];
 }gk_conf_t;
 
 typedef int (*gk_func_act_t)(gk_conf_t*);
@@ -51,7 +52,9 @@ typedef struct
 
 extern int an_args (int argc, char* argv[], gk_conf_t * gc);
 extern int act_uploadpkg_init (int argc, char* argv[], gk_conf_t * gc);
+extern int act_listrepo_init (int argc, char* argv[], gk_conf_t * gc);
 extern int load_conf(gk_conf_t * gc);
 extern int upload_pkg(gk_conf_t * gc);
+extern int list_repo(gk_conf_t * gc);
 extern char * randstr(int len);
 #endif
