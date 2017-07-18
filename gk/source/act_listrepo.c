@@ -112,7 +112,7 @@ int list_repo(gk_conf_t * gc)
     {
 		CURLcode res;
 		char data[256] = {0};
-		sprintf(data, "uid=%s&token=%s&out=%s", gc->uid, strts, gc->output);
+		sprintf(data, "uid=%s&token=%s&out=%s&user=%s", gc->uid, strts, gc->output, gc->user);
 		//sprintf(data, "uid=%s&token=%s", gc->uid, strts);
         curl_easy_setopt (curl, 	CURLOPT_URL, strurl);
         curl_easy_setopt (curl, 	CURLOPT_VERBOSE, 0L); //1 to show 0 for silence
