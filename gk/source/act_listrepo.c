@@ -74,11 +74,8 @@ int act_listrepo_init(int argc, char* argv[], gk_conf_t * gc)
 int list_repo(gk_conf_t * gc)
 {
 	CURL *curl;
-    CURLM *multi_handle;
     int still_running;
     struct curl_httppost *formpost = NULL;
-    struct curl_httppost *lastptr = NULL;
-    struct curl_slist *headerlist = NULL;
     static const char buf[] = "Expect:";
     char strurl[512] = {0};
     char  ak[128] = {0};
@@ -89,8 +86,8 @@ int list_repo(gk_conf_t * gc)
 	char strts[30] = {0};
 	int pos1 =0, pos2 = 0;
 	char salt[2] = {0};
-	printf("list repo over...\n");
-	return 0;
+	//printf("list repo over...\n");
+	//return 0;
 	//char strdata[60] = {0};
     time(&s_tm);
  	sprintf(numran, "%s", randstr(10));
@@ -99,12 +96,9 @@ int list_repo(gk_conf_t * gc)
 	pos2 = strts[9] - '0';
 	salt[0] = numran[pos1];
 	salt[1] = numran[pos2]; 
-	//sprintf(strdata, "%s%s", gc->ak, strts);
 	strncpy(strran, crypt(gc->as, salt), 80);
-//	printf("strts=%s,straran=%s,salt=%s(%d-%d)\n", strts, strran, salt, pos1, pos2);
-	
-	//return 0; 
-    sprintf(strurl, "http://%s/gkupload.php?uid=%s&repo=%s&osv=%s&arch=%s&token=%s", gc->url, gc->uid, gc->repo, gc->osv, gc->arch, strts);
+    //sprintf(strurl, "http://%s/gk_listrepo.php?uid=%s&token=%s", gc->url, gc->uid, strts);
+    sprintf(strurl, "http://%s/gk_listrepo.php?", gc->url);
 	#ifdef _DEBUG_
 	printf("%s:%d:url=%s\n", __FILE__, __LINE__, strurl);
 	#endif
@@ -112,127 +106,30 @@ int list_repo(gk_conf_t * gc)
   	#ifdef _DEBUG_
 	printf("%s:%d:ak=[%s]\n", __FILE__, __LINE__, ak);
 	#endif
-
-    /* Fill in the file upload field. This makes libcurl load data from 
-     the given file name when curl_easy_perform() is called. */
-    curl_formadd (&formpost, &lastptr, CURLFORM_COPYNAME, "gingko-uploader", CURLFORM_FILE, gc->file, CURLFORM_END);
-    
-    /* Fill in the filename field */
-    curl_formadd (&formpost, &lastptr, CURLFORM_COPYNAME, "filename", CURLFORM_COPYCONTENTS, gc->file, CURLFORM_END);
-
-    /* Fill in the submit field too, even if this is rarely needed */
-
-    curl_formadd (&formpost, &lastptr, CURLFORM_COPYNAME, "submit", CURLFORM_COPYCONTENTS, "send", CURLFORM_END);
-
+	curl_global_init(CURL_GLOBAL_ALL);
 	curl = curl_easy_init ();
-    multi_handle = curl_multi_init ();
-
-    /* initalize custom header list (stating that Expect: 100-continue is not 
-     wanted */
-    headerlist = curl_slist_append (headerlist, buf);
-    if (curl && multi_handle)
+    if (curl)
     {
-		/* what URL that receives this POST */
-        curl_easy_setopt (curl, CURLOPT_URL, strurl);
-        curl_easy_setopt (curl, CURLOPT_VERBOSE, 0L); //1 to show 0 for silence
-
-        curl_easy_setopt (curl, CURLOPT_HTTPHEADER, headerlist);
-        curl_easy_setopt (curl, CURLOPT_HTTPPOST, formpost);
-
-        curl_multi_add_handle (multi_handle, curl);
-
-        //curl_easy_setopt(curl, CURLOPT_HTTPAUTH, (long)CURLAUTH_ANY);
- 
-        /* set user name and password for the authentication */ 
-        curl_easy_setopt(curl, CURLOPT_USERPWD, ak);
-
-        curl_multi_perform (multi_handle, &still_running);
-        //printf("start uploading now...\n");
-        time(&now);
-        do
-	    {
-	        struct timeval timeout;
-	        int rc;		/* select() return code */
-            time_t ntm;
-	        fd_set fdread;
-	        fd_set fdwrite;
-	        fd_set fdexcep;
-	        int maxfd = -1;
-
-	        long curl_timeo = -1;
-            
-	        FD_ZERO (&fdread);
-	        FD_ZERO (&fdwrite);
-	        FD_ZERO (&fdexcep);
-
-	        /* set a suitable timeout to play around with */
-	        timeout.tv_sec = 1;
-	        timeout.tv_usec = 0;
-
-	        curl_multi_timeout (multi_handle, &curl_timeo);
-	        if (curl_timeo >= 0)
-	        {
-	            timeout.tv_sec = curl_timeo / 1000;
-	            if (timeout.tv_sec > 1)
-		        timeout.tv_sec = 1;
-	            else
-		        timeout.tv_usec = (curl_timeo % 1000) * 1000;
-	        }
-
-	    /* get file descriptors from the transfers */
-	        curl_multi_fdset (multi_handle, &fdread, &fdwrite, &fdexcep, &maxfd);
-			/* In a real-world program you OF COURSE check the return code of the 
-	     function calls.  On success, the value of maxfd is guaranteed to be 
-	     greater or equal than -1.  We call select(maxfd + 1, ...), specially in 
-	     case of (maxfd == -1), we call select(0, ...), which is basically equal 
-	     to sleep. */
-
-            rc = select (maxfd + 1, &fdread, &fdwrite, &fdexcep, &timeout);
-	        switch (rc)
-            {
-	            case -1:
-                    printf("Error.........\n");
-                    return 1;
-	             /* select error */
-	                break;
-	            case 0:
-	            default:
-	            /* timeout or readable/writable sockets */
-	            //printf ("#");
-	                curl_multi_perform (multi_handle, &still_running);
-	                //printf ("running: %d!\n", still_running);
-                    time(&ntm);
-                    if(ntm - now >= 1)
-                    {
-                        now = ntm;
-                        //printf("#");
-                    }
-	                break;
-	        }
-        }while (still_running);
-
-        //printf("\n");
-        curl_multi_cleanup (multi_handle);
-
-        /* always cleanup */
+		CURLcode res;
+		char data[256] = {0};
+		sprintf(data, "uid=%s&token=%s&out=%s", gc->uid, strts, gc->output);
+		//sprintf(data, "uid=%s&token=%s", gc->uid, strts);
+        curl_easy_setopt (curl, 	CURLOPT_URL, strurl);
+        curl_easy_setopt (curl, 	CURLOPT_VERBOSE, 0L); //1 to show 0 for silence
+        curl_easy_setopt (curl, 	CURLOPT_POSTFIELDS, data);
+        curl_easy_setopt(curl, 		CURLOPT_USERPWD, ak);
+    	#ifdef _DEBUG_
+		printf("%s:%d:postdata=[%s],ak=%s\n", __FILE__, __LINE__, data, ak);
+		#endif
+		res = curl_easy_perform(curl);
+		// Check for errors 
+    	if(res != CURLE_OK)
+      		fprintf(stderr, "curl_easy_perform() failed: %s\n",
+        curl_easy_strerror(res));
+        //time(&now);
         curl_easy_cleanup (curl);
-
-        /* then cleanup the formpost chain */
-        curl_formfree (formpost);
-
-      /* free slist */
-        curl_slist_free_all (headerlist);
-        }
-
-        time(&e_tm);
-      	if(1)
-		{
-        	int ts_df = e_tm - s_tm;
-        	off_t size = (st.st_size);
-        	if(ts_df <=0) ts_df = 1;
-        	//printf("Finished uploading '%s' to '%s'\n", gc->file, strurl);
-        	//printf("%d second(s) elapsed, size: %u Kb,  avg speed: %u KB/s\n", ts_df, size, size/ts_df);
-		}
-		return 0;
+  	 }else printf("curl init failed\n");
+	curl_global_cleanup();
+	return 0;
 }
 

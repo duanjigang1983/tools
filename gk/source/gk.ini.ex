@@ -5,3 +5,4 @@ access_secret=your_access_secret
 
 [system]
 gkhome=ease2cloud.com
+output=json/text

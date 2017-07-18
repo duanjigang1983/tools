@@ -85,6 +85,7 @@ int load_conf(gk_conf_t * gc)
 	sprintf (gc->as, "%s", read_string(ini, "config", "access_secret", "none"));	
 	sprintf (gc->uid, "%s", read_string(ini, "config", "uid", "none"));	
 	sprintf (gc->uid, "%s", read_string(ini, "config", "uid", "none"));	
+	sprintf (gc->output, "%s", read_string(ini, "system", "output", "text"));	
 	sprintf (gc->url, "%s", read_string(ini, "system", "gkhome", "ease2cloud.com/easepkg"));	
 	//check ak
 	if(NULL != strstr(gc->ak, "none"))

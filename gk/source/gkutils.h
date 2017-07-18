@@ -37,6 +37,7 @@ typedef struct _gk_conf_t
     char uid[GK_STR_LEN];
     char url[GK_URL_LEN];
 	char user[GK_STR_LEN];
+	char output[GK_STR_LEN];
 }gk_conf_t;
 
 typedef int (*gk_func_act_t)(gk_conf_t*);

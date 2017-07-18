@@ -68,6 +68,7 @@ my_usage	act_uploadpkg.c	/^static void my_usage(int argc, char* argv[])$/;"	f	fi
 name	gkupload.php	/^		$name = $_FILES[$code]['name'];$/;"	v
 osv	gkupload.php	/^		$osv = $_GET['osv'];$/;"	v
 osv	gkutils.h	/^    char osv[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+output	gkutils.h	/^	char output[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
 pass	gkupload.php	/^		$pass =$_SERVER['PHP_AUTH_PW'];$/;"	v
 randstr	gkutils.c	/^char * randstr(int len)$/;"	f
 read_int	iniHelper.c	/^int read_int(void* data, const char *szSec, const char *szName, int nDefault)$/;"	f
