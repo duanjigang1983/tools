@@ -6,9 +6,9 @@ default:
   requires:
     - glibc-devel
     - curl
-  summary: ginkgos command to manage reposity and package from a remote host
-  packager: 'ginkgos'
-  group: 'ginkgos'
+  summary: ginkgoo command to manage reposity and package from a remote host
+  packager: 'ginkgoo'
+  group: 'ginkgoo'
   version: '1.1.0'
   description: 'cmd:date;cat source/readme;'
   files:
