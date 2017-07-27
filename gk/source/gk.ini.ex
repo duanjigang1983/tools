@@ -4,5 +4,5 @@ access_key=your_access_key
 access_secret=your_access_secret
 
 [system]
-gkhome=ease2cloud.com
+gkhome=ginkgoo.org
 output=json/text
