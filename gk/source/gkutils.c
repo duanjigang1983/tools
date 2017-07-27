@@ -107,7 +107,16 @@ int load_conf(gk_conf_t * gc)
 		printf("can not read 'uid' from section '[config]'\n"); 
 		close_ini(ini); 
 		return 1;
-	}	
+	}
+	//check by server but not client	
+	/*if((strcmp(gc->output, "text"))&&(strcmp(gc->output, "json")))
+	{
+		printf("output in file '%s' can only be text or json\n", gc->conf); 
+		close_ini(ini); 
+		return 1;
+
+	}*/
+	close_ini(ini);
 	//printf("load config success:%s,%s,%s,%s\n", gc->ak, gc->as, gc->uid, gc->url);
 	return 0;
 
