@@ -55,7 +55,8 @@ int an_args(int argc, char* argv[], gk_conf_t * gc)
 	if((gc->action <= ACT_MIN_ACTION) || (gc->action >= ACT_MAX_ACTION))
 	{
 		printf("Invalid action name:'%s',only support:\n", action);
-		for(i=0;i < size; i++)
+		//for(i=0;i < size; i++)
+		for(i=1;i < size-1; i++)
 		{
 			printf("\t\"%s\":\t\t\"%s\"\n", gk_action_list[i].act_name, gk_action_list[i].act_desc);
 		}
