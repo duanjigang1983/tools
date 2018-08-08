@@ -10,9 +10,9 @@ void usage(int argc, char* argv[])
 int an_args(int argc, char* argv[], gk_conf_t * gc)
 {
 	int opt,i, size;
-	struct stat st;
+	//struct stat st;
 	char action[GK_STR_LEN] = {0};
-    char *string = "hc:k:f:r:v:a:u:";
+    char *string = "hc:k:f:r:v:a:u:i:e:";
 	memset(gc,0,sizeof(gk_conf_t));
 	//printf("optind:%d，opterr：%d, optarg:%s, opt:%c\n",optind,opterr, optarg, opt);
     while ((opt = getopt(argc, argv, string))!= -1)
@@ -25,6 +25,11 @@ int an_args(int argc, char* argv[], gk_conf_t * gc)
 			case 'k': //action name
 					sprintf(action, optarg);
 					break;	
+			case 'e': //action name
+					sprintf(gc->endpoint, optarg);
+					break;	
+
+
 			//default:
 			case 'h':
 				usage(argc, argv);
@@ -63,7 +68,17 @@ int an_args(int argc, char* argv[], gk_conf_t * gc)
 		return 1;
 	}
 	//then check
-	if(strlen(gc->conf) == 0) {printf("conf is needed\n");usage(argc, argv);return 1;}
+	if(strlen(gc->conf) == 0) 
+	{
+		if(access(default_conf, R_OK))
+		{
+			printf("conf is needed\n");
+			usage(argc, argv);
+			return 1;
+		}
+		strcpy(gc->conf, default_conf);
+	}
+
 	// check file
 	//if(stat(gc->conf, &st)) {printf("can not access file: '%s'\n",gc->conf);return 1;}		
 	#ifdef _DEBUG_
@@ -76,7 +91,7 @@ int an_args(int argc, char* argv[], gk_conf_t * gc)
 int load_conf(gk_conf_t * gc)
 {
 	void * ini = NULL;
-    section sc;
+    //section sc;
     if(NULL == (ini = init_ini(gc->conf)))
     {
             printf ("open file '%s' for reading failed\n", gc->conf);
@@ -88,6 +103,15 @@ int load_conf(gk_conf_t * gc)
 	sprintf (gc->uid, "%s", read_string(ini, "config", "uid", "none"));	
 	sprintf (gc->output, "%s", read_string(ini, "system", "output", "text"));	
 	sprintf (gc->url, "%s", read_string(ini, "system", "gkhome", "ease2cloud.com/easepkg"));	
+	sprintf (gc->upload_method, "%s", read_string(ini, "system", "upload", "gkupload.php"));	
+
+	//firstly, we accept input from the user
+	
+	if(strlen(gc->endpoint) > 0)
+	{
+		memset(gc->url, 0, sizeof(gc->url));
+		strcpy(gc->url, gc->endpoint);
+	}
 	//check ak
 	if(NULL != strstr(gc->ak, "none"))
 	 {

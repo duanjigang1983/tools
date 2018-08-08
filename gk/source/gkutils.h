@@ -27,17 +27,19 @@ enum
 typedef struct _gk_conf_t
 {
 	enum GK_ACTION action;
-    char conf[GK_FILE_LEN];
-    char file[GK_FILE_LEN];
-    char repo[GK_STR_LEN];
-    char osv[GK_STR_LEN];
-    char arch[GK_STR_LEN];
-    char ak[GK_STR_LEN];
-    char as[GK_STR_LEN];
-    char uid[GK_STR_LEN];
-    char url[GK_URL_LEN];
+    	char conf[GK_FILE_LEN];
+    	char file[GK_FILE_LEN];
+    	char repo[GK_STR_LEN];
+    	char osv[GK_STR_LEN];
+    	char app[GK_STR_LEN];
+    	char ak[GK_STR_LEN];
+    	char as[GK_STR_LEN];
+    	char uid[GK_STR_LEN];
+    	char url[GK_URL_LEN];
 	char user[GK_STR_LEN];
 	char output[GK_STR_LEN];
+	char upload_method[GK_STR_LEN];
+	char endpoint[GK_STR_LEN];
 }gk_conf_t;
 
 typedef int (*gk_func_act_t)(gk_conf_t*);
@@ -62,4 +64,5 @@ extern int upload_pkg(gk_conf_t * gc);
 extern int list_pkg(gk_conf_t * gc);
 extern int list_repo(gk_conf_t * gc);
 extern char * randstr(int len);
+#define  default_conf "/usr/local/gk/etc/gk.ini"
 #endif

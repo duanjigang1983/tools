@@ -1,5 +1,5 @@
 #!/bin/sh
-FLAG=-D_D2EBUG_ -D_XOPEN_SOURCE -O2
+FLAG=-D_D2EBUG_ -D_XOPEN_SOURCE -O2 -Wall
 gk:gk.o iniHelper.o gkutils.o act_uploadpkg.o act_listrepo.o act_listpkg.o
 	gcc -o gk gk.o iniHelper.o gkutils.o act_uploadpkg.o act_listrepo.o act_listpkg.o  -L /usr/lib64 -lcurl -lcrypt
 gk.o:gk.c

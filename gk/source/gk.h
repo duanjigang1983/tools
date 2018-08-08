@@ -10,4 +10,5 @@ static gk_action_t gk_action_list [] =
 	//{"listpkg", 	ACT_LIST_PKG,		&list_pkg, 		&act_listpkg_init,		"list all packages you can access"},
 	{"max_act", 	ACT_MAX_ACTION,		NULL, 			NULL,					"never define anything after this item"}
 };
+
 #endif

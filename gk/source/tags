@@ -1,0 +1,86 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ACT_LIST_PKG	gkutils.h	/^		ACT_LIST_PKG,$/;"	e	enum:GK_ACTION
+ACT_LIST_REPO	gkutils.h	/^		ACT_LIST_REPO,$/;"	e	enum:GK_ACTION
+ACT_MAX_ACTION	gkutils.h	/^		ACT_MAX_ACTION$/;"	e	enum:GK_ACTION
+ACT_MIN_ACTION	gkutils.h	/^		ACT_MIN_ACTION = 0,$/;"	e	enum:GK_ACTION
+ACT_UPLOAD_PKG	gkutils.h	/^		ACT_UPLOAD_PKG,$/;"	e	enum:GK_ACTION
+FLAG	Makefile	/^FLAG=-D_D2EBUG_ -D_XOPEN_SOURCE -O2$/;"	m
+GK_ACTION	gkutils.h	/^	GK_ACTION $/;"	g
+GK_FILE_LEN	gkutils.h	16;"	d
+GK_STR_LEN	gkutils.h	15;"	d
+GK_URL_LEN	gkutils.h	17;"	d
+INI__INCLUDED_	iniHelper.h	3;"	d
+MAX	iniHelper.c	3;"	d	file:
+MAX_SEC	iniHelper.h	12;"	d
+MAX_VAR	iniHelper.h	11;"	d
+MIN	iniHelper.c	4;"	d	file:
+SEC_TITLE	iniHelper.h	10;"	d
+VAR_NAME	iniHelper.h	8;"	d
+VAR_VAL	iniHelper.h	9;"	d
+_GK_H_	gk.h	2;"	d
+_G_U_H_	gkutils.h	2;"	d
+_gk_conf_t	gkutils.h	/^typedef struct _gk_conf_t$/;"	s
+_section	iniHelper.h	/^typedef struct _section$/;"	s
+_var_entry	iniHelper.h	/^typedef struct _var_entry$/;"	s
+act_desc	gkutils.h	/^	char * act_desc;$/;"	m	struct:__anon2
+act_func	gkutils.h	/^	gk_func_act_t 	act_func;$/;"	m	struct:__anon2
+act_id	gkutils.h	/^	enum GK_ACTION act_id;$/;"	m	struct:__anon2	typeref:enum:__anon2::GK_ACTION
+act_listpkg_init	act_listpkg.c	/^int act_listpkg_init(int argc, char* argv[], gk_conf_t * gc)$/;"	f
+act_listrepo_init	act_listrepo.c	/^int act_listrepo_init(int argc, char* argv[], gk_conf_t * gc)$/;"	f
+act_name	gkutils.h	/^	char * act_name;$/;"	m	struct:__anon2
+act_uploadpkg_init	act_uploadpkg.c	/^int act_uploadpkg_init(int argc, char* argv[], gk_conf_t * gc)$/;"	f
+action	gkutils.h	/^	enum GK_ACTION action;$/;"	m	struct:_gk_conf_t	typeref:enum:_gk_conf_t::GK_ACTION
+ak	gkutils.h	/^    	char ak[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+an_args	gkutils.c	/^int an_args(int argc, char* argv[], gk_conf_t * gc)$/;"	f
+arch	gkutils.h	/^    	char arch[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+as	gkutils.h	/^    	char as[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+close_ini	iniHelper.c	/^void 	close_ini(void * data)$/;"	f
+conf	gkutils.h	/^    	char conf[GK_FILE_LEN];$/;"	m	struct:_gk_conf_t
+default_conf	gkutils.h	66;"	d
+entry_list	iniHelper.h	/^	var_entry entry_list[MAX_VAR];$/;"	m	struct:_section
+entry_number	iniHelper.h	/^	int		entry_number;$/;"	m	struct:_section
+file	gkutils.h	/^    	char file[GK_FILE_LEN];$/;"	m	struct:_gk_conf_t
+gk_action_list	gk.h	/^static gk_action_t gk_action_list [] = $/;"	v
+gk_action_t	gkutils.h	/^}gk_action_t;$/;"	t	typeref:struct:__anon2
+gk_conf_t	gkutils.h	/^}gk_conf_t;$/;"	t	typeref:struct:_gk_conf_t
+gk_func_act_t	gkutils.h	/^typedef int (*gk_func_act_t)(gk_conf_t*);$/;"	t
+gk_func_init_t	gkutils.h	/^typedef int (*gk_func_init_t)(int, char* [], gk_conf_t*);$/;"	t
+have_error	iniHelper.c	/^int have_error(void* data)$/;"	f
+ini_t	iniHelper.c	/^}ini_t;$/;"	t	typeref:struct:__anon1	file:
+init_func	gkutils.h	/^	gk_func_init_t 	init_func;$/;"	m	struct:__anon2
+init_ini	iniHelper.c	/^void* init_ini(const char* file)$/;"	f
+list_pkg	act_listpkg.c	/^int list_pkg(gk_conf_t * gc)$/;"	f
+list_repo	act_listrepo.c	/^int list_repo(gk_conf_t * gc)$/;"	f
+load_conf	gkutils.c	/^int load_conf(gk_conf_t * gc)$/;"	f
+m_Error	iniHelper.c	/^	int  m_Error; \/\/ error flag$/;"	m	struct:__anon1	file:
+m_fp	iniHelper.c	/^	FILE * m_fp ; \/\/file pointer$/;"	m	struct:__anon1	file:
+m_nRet	iniHelper.c	/^	int  m_nRet;$/;"	m	struct:__anon1	file:
+m_pos	iniHelper.c	/^	long m_pos;$/;"	m	struct:__anon1	file:
+m_strRet	iniHelper.c	/^	char m_strRet[VAR_VAL];$/;"	m	struct:__anon1	file:
+main	gk.c	/^int main (int argc, char *argv[])$/;"	f
+my_usage	act_listpkg.c	/^static void my_usage(int argc, char* argv[])$/;"	f	file:
+my_usage	act_listrepo.c	/^static void my_usage(int argc, char* argv[])$/;"	f	file:
+my_usage	act_uploadpkg.c	/^static void my_usage(int argc, char* argv[])$/;"	f	file:
+osv	gkutils.h	/^    	char osv[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+output	gkutils.h	/^	char output[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+randstr	gkutils.c	/^char * randstr(int len)$/;"	f
+read_int	iniHelper.c	/^int read_int(void* data, const char *szSec, const char *szName, int nDefault)$/;"	f
+read_section	iniHelper.c	/^int read_section(void* data, section * pSec)$/;"	f
+read_string	iniHelper.c	/^char* read_string(void* data, const char *szSec, const char *szName, const char *szDefault)$/;"	f
+repo	gkutils.h	/^    	char repo[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+section	iniHelper.h	/^}section;$/;"	t	typeref:struct:_section
+title	iniHelper.h	/^	char title[SEC_TITLE];$/;"	m	struct:_section
+uid	gkutils.h	/^    	char uid[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+upload_method	gkutils.h	/^	char upload_method[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+upload_pkg	act_uploadpkg.c	/^int upload_pkg(gk_conf_t * gc)$/;"	f
+url	gkutils.h	/^    	char url[GK_URL_LEN];$/;"	m	struct:_gk_conf_t
+usage	gkutils.c	/^void usage(int argc, char* argv[])$/;"	f
+user	gkutils.h	/^	char user[GK_STR_LEN];$/;"	m	struct:_gk_conf_t
+var_entry	iniHelper.h	/^}var_entry;$/;"	t	typeref:struct:_var_entry
+var_name	iniHelper.h	/^	char var_name[VAR_NAME];$/;"	m	struct:_var_entry
+var_value	iniHelper.h	/^	char var_value[VAR_VAL];$/;"	m	struct:_var_entry

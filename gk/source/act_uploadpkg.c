@@ -1,15 +1,15 @@
 #include "gk.h"
 static void my_usage(int argc, char* argv[])
 {
-    printf("usage:%s -c conf -k action -f rpm/deb-file -v osversion -r reponame -a arch\n", argv[0]);
+    printf("usage:%s -c conf -k action -f rpm/deb-file -v os -r reponame -i instance \n", argv[0]);
 }
 
 int act_uploadpkg_init(int argc, char* argv[], gk_conf_t * gc)
 {
-	int opt,i, size;
+	int opt;
 	struct stat st;
-	char action[GK_STR_LEN] = {0};
-    char *string = "hc:k:f:v:r:a:";
+	//char action[GK_STR_LEN] = {0};
+    char *string = "hc:k:f:v:r:a:i:e:";
 	optind = 1;
 	//opt='\0';
     while ((opt = getopt(argc, argv, string))!= -1)
@@ -35,8 +35,8 @@ int act_uploadpkg_init(int argc, char* argv[], gk_conf_t * gc)
 			case 'v': //os version
 					sprintf(gc->osv, optarg);
 					break;	
-			case 'a': //arch number
-					sprintf(gc->arch, optarg);
+			case 'i': //arch number
+					sprintf(gc->app, optarg);
 					break;	
 			//default:
 			case 'h':
@@ -50,12 +50,12 @@ int act_uploadpkg_init(int argc, char* argv[], gk_conf_t * gc)
 	if(strlen(gc->file) == 0) {printf("uploadpkg file is needed\n"); my_usage(argc, argv);return 1;}
 	if(strlen(gc->repo) == 0) {printf("repo is needed\n"); my_usage(argc, argv);return 1;}
 	if(strlen(gc->osv) == 0) {printf("version is needed\n"); my_usage(argc, argv);return 1;}
-	if(strlen(gc->arch) == 0) {printf("arch is needed\n"); my_usage(argc, argv);return 1;}
+	if(strlen(gc->app) == 0) {printf("instance name is needed\n"); my_usage(argc, argv);return 1;}
 	// check file
 	//if(stat(gc->conf, &st)) {printf("can not access file: '%s'\n",gc->conf);return 1;}		
 	if(stat(gc->file, &st)) {printf("can not access file: '%s'\n",gc->file);return 1;}		
 	#ifdef _DEBUG_
-	printf("%s:%d:parese args success,file=%s,repo=%s,osv=%s,arch=%s\n", __FILE__, __LINE__, gc->file, gc->repo, gc->osv, gc->arch);
+	printf("%s:%d:parese args success,file=%s,repo=%s,osv=%s\n", __FILE__, __LINE__, gc->file, gc->repo, gc->osv);
 	#endif
 	return 0;
 }
@@ -72,7 +72,7 @@ int upload_pkg(gk_conf_t * gc)
     static const char buf[] = "Expect:";
     char strurl[512] = {0};
     char  ak[128] = {0};
-    struct stat st; 
+    //struct stat st; 
     time_t s_tm,e_tm, now;
 	char numran[10] = {0};
 	char strran[80] = {0};
@@ -82,7 +82,7 @@ int upload_pkg(gk_conf_t * gc)
 	//char strdata[60] = {0};
     time(&s_tm);
  	sprintf(numran, "%s", randstr(10));
-	sprintf(strts, "%u%s", s_tm, numran);
+	sprintf(strts, "%u%s", (unsigned int)s_tm, numran);
 	pos1 = strts[8] - '0';
 	pos2 = strts[9] - '0';
 	salt[0] = numran[pos1];
@@ -92,7 +92,8 @@ int upload_pkg(gk_conf_t * gc)
 //	printf("strts=%s,straran=%s,salt=%s(%d-%d)\n", strts, strran, salt, pos1, pos2);
 	
 	//return 0; 
-    sprintf(strurl, "http://%s/gkupload.php?uid=%s&repo=%s&osv=%s&arch=%s&token=%s", gc->url, gc->uid, gc->repo, gc->osv, gc->arch, strts);
+    //sprintf(strurl, "http://%s/gkupload.php?uid=%s&repo=%s&osv=%s&arch=%s&token=%s", gc->url, gc->uid, gc->repo, gc->osv, gc->arch, strts);
+    sprintf(strurl, "http://%s/%s?uid=%s&repo=%s&osv=%s&token=%s&app=%s", gc->url, gc->upload_method,  gc->uid, gc->repo, gc->osv,  strts, gc->app);
 	#ifdef _DEBUG_
 	printf("%s:%d:url=%s\n", __FILE__, __LINE__, strurl);
 	#endif
@@ -216,7 +217,7 @@ int upload_pkg(gk_conf_t * gc)
       	if(1)
 		{
         	int ts_df = e_tm - s_tm;
-        	off_t size = (st.st_size);
+        	//off_t size = (st.st_size);
         	if(ts_df <=0) ts_df = 1;
         	//printf("Finished uploading '%s' to '%s'\n", gc->file, strurl);
         	//printf("%d second(s) elapsed, size: %u Kb,  avg speed: %u KB/s\n", ts_df, size, size/ts_df);

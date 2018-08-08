@@ -1,4 +1,4 @@
-#include "gk.h"
+#include "gkutils.h"
 static void my_usage(int argc, char* argv[])
 {
     printf("usage:%s -c conf -k listrepo -u [me/any]\n", argv[0]);
@@ -6,9 +6,9 @@ static void my_usage(int argc, char* argv[])
 
 int act_listrepo_init(int argc, char* argv[], gk_conf_t * gc)
 {
-	int opt,i, size;
+	int opt;
 	struct stat st;
-	char action[GK_STR_LEN] = {0};
+	//char action[GK_STR_LEN] = {0};
     char *string = "hc:k:u:";
 	optind = 1;
 	//opt='\0';
@@ -74,13 +74,13 @@ int act_listrepo_init(int argc, char* argv[], gk_conf_t * gc)
 int list_repo(gk_conf_t * gc)
 {
 	CURL *curl;
-    int still_running;
-    struct curl_httppost *formpost = NULL;
-    static const char buf[] = "Expect:";
+    //int still_running;
+    //struct curl_httppost *formpost = NULL;
+    //static const char buf[] = "Expect:";
     char strurl[512] = {0};
     char  ak[128] = {0};
-    struct stat st; 
-    time_t s_tm,e_tm, now;
+    //struct stat st; 
+    time_t s_tm;
 	char numran[10] = {0};
 	char strran[80] = {0};
 	char strts[30] = {0};
@@ -91,7 +91,7 @@ int list_repo(gk_conf_t * gc)
 	//char strdata[60] = {0};
     time(&s_tm);
  	sprintf(numran, "%s", randstr(10));
-	sprintf(strts, "%u%s", s_tm, numran);
+	sprintf(strts, "%u%s", (unsigned int)s_tm, numran);
 	pos1 = strts[8] - '0';
 	pos2 = strts[9] - '0';
 	salt[0] = numran[pos1];
