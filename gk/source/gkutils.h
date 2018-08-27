@@ -15,6 +15,7 @@ extern void usage(int argc, char* argv[]);
 #define GK_STR_LEN 64
 #define GK_FILE_LEN 128
 #define GK_URL_LEN 128
+#define GK_INFO_LEN 512
 enum	
 	GK_ACTION 
 {
@@ -40,6 +41,7 @@ typedef struct _gk_conf_t
 	char output[GK_STR_LEN];
 	char upload_method[GK_STR_LEN];
 	char endpoint[GK_STR_LEN];
+	char info[GK_INFO_LEN];
 }gk_conf_t;
 
 typedef int (*gk_func_act_t)(gk_conf_t*);

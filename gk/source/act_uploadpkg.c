@@ -1,7 +1,7 @@
 #include "gk.h"
 static void my_usage(int argc, char* argv[])
 {
-    printf("usage:%s -c conf -k action -f rpm/deb-file -v os -r reponame -i instance \n", argv[0]);
+    printf("usage:%s -c conf -k action -f rpm/deb-file -v os -r reponame -i instance -m information \n", argv[0]);
 }
 
 int act_uploadpkg_init(int argc, char* argv[], gk_conf_t * gc)
@@ -9,7 +9,7 @@ int act_uploadpkg_init(int argc, char* argv[], gk_conf_t * gc)
 	int opt;
 	struct stat st;
 	//char action[GK_STR_LEN] = {0};
-    char *string = "hc:k:f:v:r:a:i:e:";
+    char *string = "hc:k:f:v:r:a:i:e:m:";
 	optind = 1;
 	//opt='\0';
     while ((opt = getopt(argc, argv, string))!= -1)
@@ -38,6 +38,10 @@ int act_uploadpkg_init(int argc, char* argv[], gk_conf_t * gc)
 			case 'i': //arch number
 					sprintf(gc->app, optarg);
 					break;	
+			case 'm': //arch number
+					sprintf(gc->info, optarg);
+					break;	
+
 			//default:
 			case 'h':
 				my_usage(argc, argv);
@@ -93,6 +97,9 @@ int upload_pkg(gk_conf_t * gc)
 	
 	//return 0; 
     //sprintf(strurl, "http://%s/gkupload.php?uid=%s&repo=%s&osv=%s&arch=%s&token=%s", gc->url, gc->uid, gc->repo, gc->osv, gc->arch, strts);
+    if(strlen(gc->info) > 0)
+    sprintf(strurl, "http://%s/%s?uid=%s&repo=%s&osv=%s&token=%s&app=%s&info=%s", gc->url, gc->upload_method,  gc->uid, gc->repo, gc->osv,  strts, gc->app, gc->info);
+	else
     sprintf(strurl, "http://%s/%s?uid=%s&repo=%s&osv=%s&token=%s&app=%s", gc->url, gc->upload_method,  gc->uid, gc->repo, gc->osv,  strts, gc->app);
 	#ifdef _DEBUG_
 	printf("%s:%d:url=%s\n", __FILE__, __LINE__, strurl);

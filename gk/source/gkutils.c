@@ -12,7 +12,7 @@ int an_args(int argc, char* argv[], gk_conf_t * gc)
 	int opt,i, size;
 	//struct stat st;
 	char action[GK_STR_LEN] = {0};
-    char *string = "hc:k:f:r:v:a:u:i:e:";
+    char *string = "hc:k:f:r:v:a:u:i:e:m:";
 	memset(gc,0,sizeof(gk_conf_t));
 	//printf("optind:%d，opterr：%d, optarg:%s, opt:%c\n",optind,opterr, optarg, opt);
     while ((opt = getopt(argc, argv, string))!= -1)
